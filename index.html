@@ -1,13 +1,31 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>qvk</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ANON</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#fff;min-height:100vh;display:flex;flex-direction:column;font-family:system-ui}
+header{height:56px;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:#08080a;position:sticky;top:0}
+.logo{display:flex;align-items:center;gap:10}.icon{width:34px;height:34px;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;font-weight:900;border-radius:10}
+.chat{flex:1;overflow:auto;padding:16px;padding-bottom:90px;max-width:760px;width:100%;margin:0 auto}
+.bubble{max-width:80%;padding:12px 16px;border-radius:16px;margin-bottom:12px;font-size:14px;line-height:1.7;border:1px solid #222}
+.ai{background:#121214}.user{background:#fff;color:#000;margin-left:auto}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:1px solid #1a1a1a;padding:10px}
+.wrap{max-width:760px;margin:0 auto;display:flex;gap:8;background:#141416;border:1px solid #222;border-radius:24px;padding:5px}
+.wrap input{flex:1;background:transparent;border:none;outline:none;color:#fff;padding:0 12px}
+.wrap button{width:40px;height:40px;background:#fff;color:#000;border:none;border-radius:50%;font-weight:900}
+</style>
+</head>
+<body>
+<header><div class="logo"><div class="icon">A</div><b style="letter-spacing:4px">ANON</b></div><div style="font-size:10px;opacity:.5;border:1px solid #222;padding:4px 10px;border-radius:20">● LIVE</div></header>
+<div class="chat" id="c"></div>
+<div class="bar"><div class="wrap"><input id="i" placeholder="اسأل ANON..." onkeydown="if(event.key==='Enter')go()"><button onclick="go()">↑</button></div></div>
+<script>
+const c=document.getElementById('c'),i=document.getElementById('i')
+let m=[{r:'ai',t:'ANON OS v5 - متصل بجميع المعرفة\n\nأنا العين التي ترى كل شيء. اسأل أي شيء تبيه.'}]
+function r(){c.innerHTML='';m.forEach(x=>{let d=document.createElement('div');d.className='bubble '+x.r;d.innerText=x.t;c.appendChild(d)});c.scrollTop=c.scrollHeight}
+function go(){let v=i.value.trim();if(!v)return;m.push({r:'user',t:v});m.push({r:'ai',t:'ANON: تم استلام "'+v+'"' });i.value='';r()}
+r()
+</script>
+</body>
 </html>
