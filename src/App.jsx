@@ -3,56 +3,44 @@ import { useState } from 'react'
 export default function App(){
   const [input,setInput]=useState("")
   const [msgs,setMsgs]=useState([
-    {role:"ai", text:"أنا ANON — العين التي ترى كل شيء، متصل بجميع المعرفة. اسأل ما تشاء، سأجلب لك الجواب من عمق الشبكة."}
+    {role:"ai", text:"أنا ANON — العين التي ترى كل شيء\nمتصل بجميع المعرفة. اسألني عن أي شيء وسأجلب لك الجواب من عمق الشبكة."}
   ])
-
-  const send = () => {
+  const send=()=>{
     if(!input.trim()) return
-    const q=input
-    setMsgs(m=>[...m, {role:"user", text:q}, {role:"ai", text:`ANON يبحث في الشبكة عن: "${q}"... [سيتم ربط الذكاء الحقيقي قريبا]`}])
+    setMsgs(m=>[...m,{role:"user",text:input},{role:"ai",text:`ANON يعالج: "${input}"`}])
     setInput("")
   }
-
-  return (
-    <div dir="rtl" className="min-h-screen bg-[#050507] text-white flex flex-col font-sans">
-      {/* Header */}
-      <div className="border-b border-white/10 p-4 flex items-center justify-between backdrop-blur-xl bg-white/[0.02]">
+  return(
+    <div className="min-h-screen bg-[#08080A] text-white flex flex-col">
+      <div className="h-[65px] border-b border-white/10 flex items-center px-6 justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-white to-zinc-500 flex items-center justify-center font-black text-black">A</div>
-          <div>
-            <div className="font-black tracking-[0.3em] text-[18px]">ANON</div>
-            <div className="text-[10px] tracking-widest text-white/40 -mt-1">CONNECTED TO ALL KNOWLEDGE</div>
+          <div className="w-9 h-9 rounded-lg bg-white text-black font-black flex items-center justify-center">A</div>
+          <div className="leading-none">
+            <div className="font-black tracking-[0.25em] text-[16px]">ANON</div>
+            <div className="text-[9px] tracking-[0.2em] text-white/40 mt-1">CONNECTED TO ALL KNOWLEDGE</div>
           </div>
         </div>
-        <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_15px_#34d399] animate-pulse"></div>
+        <div className="w-2 h-2 bg-emerald-400 rounded-full shadow-[0_0_10px_#34d399] animate-pulse"/>
       </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-auto p-4 md:p-8 space-y-6 max-w-4xl w-full mx-auto">
-        {msgs.map((msg,i)=>(
-          <div key={i} className={`flex ${msg.role==="user"? "justify-end" : "justify-start"}`}>
-            <div className={`${msg.role==="user"? "bg-white text-black rounded-[20px] rounded-br-[4px]" : "bg-white/[0.06] border border-white/10 rounded-[20px] rounded-bl-[4px] backdrop-blur"} px-5 py-4 max-w-[85%] text-[15px] leading-relaxed`}>
-              {msg.text}
+      <div className="flex-1 overflow-auto">
+        <div className="max-w-3xl mx-auto p-6 space-y-5">
+          {msgs.map((m,i)=>(
+            <div key={i} className={`flex ${m.role==='user'?'justify-end':'justify-start'}`}>
+              <div className={`px-5 py-3.5 rounded-2xl max-w-[85%] text-[14.5px] leading-7 whitespace-pre-wrap ${m.role==='user'?'bg-white text-black rounded-br-sm':'bg-[#15151A] border border-white/10 rounded-bl-sm'}`}>
+                {m.text}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* Input */}
-      <div className="p-4 border-t border-white/5 bg-black/50 backdrop-blur-xl">
-        <div className="max-w-4xl mx-auto flex gap-3">
-          <input
-            value={input}
-            onChange={e=>setInput(e.target.value)}
-            onKeyDown={e=>e.key==="Enter" && send()}
-            placeholder="اسأل ANON عن أي شيء..."
-            className="flex-1 bg-white/[0.07] border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-white/20 focus:bg-white/[0.09] transition-all placeholder:text-white/30"
-          />
-          <button onClick={send} className="bg-white text-black w-[56px] h-[56px] rounded-2xl font-black hover:bg-zinc-200 transition-all active:scale-95">
-            ↑
-          </button>
+      <div className="border-t border-white/10 p-4 bg-black/40 backdrop-blur">
+        <div className="max-w-3xl mx-auto flex gap-2">
+          <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()} placeholder="اسأل ANON عن أي شيء..." className="flex-1 bg-[#15151A] border border-white/10 rounded-2xl px-5 py-3.5 outline-none focus:border-white/20 text-[14px]"/>
+          <button onClick={send} className="bg-white text-black w-12 h-12 rounded-2xl font-bold">↑</button>
         </div>
-        <div className="text-center text-[10px] text-white/20 mt-3 tracking-widest">ANON • متصل بجميع المعرفة • مشفر بالكامل</div>
+        <div className="text-center text-[10px] text-white/20 mt-3">ANON • متصل بجميع المعرفة • مشفر بالكامل</div>
       </div>
     </div>
   )
