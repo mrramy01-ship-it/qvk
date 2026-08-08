@@ -1,36 +1,36 @@
 import { useState } from 'react'
 export default function App(){
   const [input,setInput]=useState("")
-  const [msgs,setMsgs]=useState([{role:"ai",text:"ANON OS v3 - متصل بجميع المعرفة.\n\nأنا العين التي ترى كل شيء. اسألني عن أي شيء."}])
+  const [msgs,setMsgs]=useState([{role:"ai",text:"ANON OS v4 - متصل بجميع المعرفة\n\nأنا العين التي ترى كل شيء.\nاسأل عن أي شيء تبيه."}])
   const send=()=>{
     if(!input.trim()) return
-    setMsgs(m=>[...m,{role:"user",text:input},{role:"ai",text:"ANON يعالج: "+input}])
+    setMsgs(m=>[...m,{role:"user",text:input},{role:"ai",text:"[ANON] تم استلام: "+input}])
     setInput("")
   }
-  return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
-      <div className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-zinc-950">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-white text-black font-black flex items-center justify-center rounded">A</div>
-          <div className="font-bold tracking-[0.3em]">ANON</div>
+  return(
+    <div style={{minHeight:'100vh',background:'#050507',color:'#fff',display:'flex',flexDirection:'column'}}>
+      <div style={{height:64,borderBottom:'1px solid #1e1e22',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 20px',background:'#0a0a0e'}}>
+        <div style={{display:'flex',alignItems:'center',gap:10}}>
+          <div style={{width:32,height:32,background:'#fff',color:'#000',display:'flex',alignItems:'center',justifyContent:'center',fontWeight:900,borderRadius:8,fontSize:14}}>A</div>
+          <div style={{fontWeight:900,letterSpacing:4,fontSize:14}}>ANON</div>
         </div>
-        <div className="text-xs opacity-40">LIVE</div>
+        <div style={{fontSize:10,background:'#111',border:'1px solid #222',padding:'4px 10px',borderRadius:20}}>● LIVE</div>
       </div>
-      <div className="flex-1 overflow-auto p-6">
-        <div className="max-w-2xl mx-auto space-y-4">
+
+      <div style={{flex:1,overflowY:'auto',padding:20}}>
+        <div style={{maxWidth:700,margin:'0 auto'}}>
           {msgs.map((m,i)=>(
-            <div key={i} className={m.role==="user"?"flex justify-end":"flex justify-start"}>
-              <div className={m.role==="user"?"bg-white text-black px-4 py-3 rounded-2xl max-w-[80%]":"bg-zinc-900 border border-white/10 px-4 py-3 rounded-2xl max-w-[80%] whitespace-pre-wrap"}>
-                {m.text}
-              </div>
+            <div key={i} style={{display:'flex',justifyContent:m.role==='user'?'flex-end':'flex-start',marginBottom:12}}>
+              <div style={{background:m.role==='user'?'#fff':'#15151a',color:m.role==='user'?'#000':'#eee',padding:'12px 16px',borderRadius:16,border:'1px solid #222',maxWidth:'80%',fontSize:14,lineHeight:1.7,whiteSpace:'pre-wrap'}}>{m.text}</div>
             </div>
           ))}
         </div>
       </div>
-      <div className="p-4 border-t border-white/10 bg-zinc-950">
-        <div className="max-w-2xl mx-auto flex gap-2">
-          <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send()} placeholder="اسأل ANON..." className="flex-1 bg-zinc-900 border border-white/10 rounded-full px-5 py-3 outline-none"/>
-          <button onClick={send} className="bg-white text-black w-12 h-12 rounded-full font-bold">↑</button>
+
+      <div style={{borderTop:'1px solid #1e1e22',padding:12,background:'#0a0a0e'}}>
+        <div style={{maxWidth:700,margin:'0 auto',display:'flex',gap:8}}>
+          <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==='Enter'&&send()} placeholder="اسأل ANON..." style={{flex:1,background:'#15151a',border:'1px solid #222',borderRadius:24,padding:'12px 18px',color:'#fff',outline:'none',fontSize:14}}/>
+          <button onClick={send} style={{width:44,height:44,background:'#fff',color:'#000',border:'none',borderRadius:22,fontWeight:900,cursor:'pointer'}}>↑</button>
         </div>
       </div>
     </div>
